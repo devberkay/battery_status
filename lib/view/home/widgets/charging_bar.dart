@@ -8,9 +8,15 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 final batteryPercentageProvider =
     StreamProvider.autoDispose<double>((ref) async* {
-  
-    
-  
+  final periodicStream =
+      Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
+    yield Random.secure().nextDouble();
+  });
+  await for (var streamController in periodicStream) {
+    await for (var element in streamController) {
+      print(element);
+    }
+  }
 });
 
 class ChargingBar extends HookConsumerWidget {
