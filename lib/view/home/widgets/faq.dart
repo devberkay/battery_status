@@ -26,13 +26,8 @@ class Faq extends HookConsumerWidget {
           Flushbar(
             message: "Developed by github.com/devberkay",
             messageSize: usableWidth * 0.035,
-            padding: EdgeInsets.symmetric(horizontal: usableWidth * 0.025),
-            maxWidth: usableWidth * 0.6,
+            maxWidth: usableWidth * 0.75,
             borderRadius: BorderRadius.circular(usableHeight * 0.1),
-            margin: EdgeInsets.only(
-                bottom: usableHeight * 0.04,
-                left: usableWidth % 0.2,
-                right: usableWidth * 0.2),
             mainButton: TextButton(
                 onPressed: () {
                   context.pop();
