@@ -6,8 +6,6 @@ final isMonitoringProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
 });
 
-
-
 class ActionButton extends HookConsumerWidget {
   const ActionButton({super.key});
   @override
@@ -25,9 +23,9 @@ class ActionButton extends HookConsumerWidget {
               overlayColor: MaterialStatePropertyAll(Colors.grey.shade400),
               foregroundColor: MaterialStateProperty.resolveWith((states) {
                 if (isMonitoring) {
-                  return Colors.red;
+                  return Colors.grey;
                 } else {
-                  return Colors.green;
+                  return Colors.black;
                 }
               }),
               shape: MaterialStateProperty.resolveWith((states) {
@@ -36,15 +34,15 @@ class ActionButton extends HookConsumerWidget {
                       borderRadius:
                           BorderRadius.circular(constraints.maxHeight * 0.5),
                       side: BorderSide(
-                          color: Colors.red,
-                          width: constraints.maxHeight * 0.02));
+                          color: Colors.grey,
+                          width: constraints.maxHeight * 0.05));
                 } else {
                   return RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(constraints.maxHeight * 0.5),
                       side: BorderSide(
-                          color: Colors.green,
-                          width: constraints.maxHeight * 0.02));
+                          color: Colors.black,
+                          width: constraints.maxHeight * 0.05));
                 }
               }),
               backgroundColor: MaterialStateProperty.resolveWith((states) {
