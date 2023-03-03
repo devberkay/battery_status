@@ -1,5 +1,8 @@
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
 import 'package:BatteryStatus/view/home/widgets/charging_bar.dart';
+import 'package:BatteryStatus/view/home/widgets/faq.dart';
+import 'package:BatteryStatus/view/home/widgets/notification_bell.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,12 +27,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                   children: const [
                     Expanded(
                       flex: 4,
-                      child: SizedBox(),
+                      child: Faq(),
                     ),
                     Expanded(flex: 2, child: ChargingBar()),
                     Expanded(
                       flex: 4,
-                      child: SizedBox(),
+                      child: NotificationBell(),
                     )
                   ],
                 )),
