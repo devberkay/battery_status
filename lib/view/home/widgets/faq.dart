@@ -14,7 +14,7 @@ class Faq extends HookConsumerWidget {
         style: IconButton.styleFrom(
             splashFactory: InkSparkle.splashFactory,
             fixedSize:
-                Size(constraints.maxWidth * 0.6, constraints.maxWidth * 0.6),
+                Size(constraints.maxWidth * 0.4, constraints.maxWidth * 0.4),
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
         onPressed: () {},

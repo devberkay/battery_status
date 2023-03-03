@@ -22,7 +22,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           children: [
             const Spacer(flex: 15),
             Expanded(
-                flex: 42,
+                flex: 45,
                 child: Row(
                   children: const [
                     Expanded(
@@ -37,7 +37,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ],
                 )),
             const Spacer(
-              flex: 15,
+              flex: 12,
             ),
             Expanded(
               flex: 13,
