@@ -31,7 +31,7 @@ class NotificationBell extends HookConsumerWidget {
               // Custom class to enhance reusability of the shared widgets.
               context: context,
               leftBarIndicatorColor:
-                  isAllowed ? Colors.lightGreenAccent : Colors.redAccent,
+                  isAllowed ? Colors.redAccent : Colors.lightGreenAccent,
               msg: isAllowed
                   ? "Notifications are inactive"
                   : "Notifications are active",
