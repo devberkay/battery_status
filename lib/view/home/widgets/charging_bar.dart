@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'dart:math';
 
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
@@ -27,12 +26,10 @@ class ChargingBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMonitoring =
         ref.watch(isMonitoringProvider); // true for expose , false for hide
-    final randomNo = ref.watch(batteryPercentageProvider).asData?.value ?? 0.5;
+    final randomNo = useMemoized(() => ref.watch(batteryPercentageProvider).asData?.value ?? 0.5);
     final percentageController = useAnimationController(
         duration: Duration(milliseconds: 1000), initialValue: randomNo);
-    useEffect(() {
-      percentageController.animateTo(randomNo);
-    });
+    
     return LayoutBuilder(builder: (context, constraints) {
       return SizedBox(
         height: constraints.maxHeight,
@@ -58,7 +55,7 @@ class ChargingBar extends HookConsumerWidget {
               borderWidth: constraints.maxHeight * 0.01,
               backgroundColor: Colors.grey.shade400,
               borderColor: Colors.white,
-              valueColor: Animation(),
+              valueColor: Tween(begin: ),
             );
           }
         ),
