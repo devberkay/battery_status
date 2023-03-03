@@ -12,12 +12,29 @@ class HomePage extends StatefulHookConsumerWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.zero, child: Column(
-      children: const [
-         Spacer(flex:35),
-         Expanded(child: ActionButton(),flex: 15,),
-         Spacer(flex:20)
-      ],
-    ));
+    return Padding(
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            const Spacer(flex: 20),
+            const Expanded(
+              flex: 30,
+              child: SizedBox(),
+            ),
+            Expanded(
+              flex: 10,
+              child: Row(
+                children: const [
+                  Spacer(
+                    flex: 5,
+                  ),
+                  Expanded(flex: 25, child: ActionButton()),
+                  Spacer(flex: 5)
+                ],
+              ),
+            ),
+            const Spacer(flex: 20)
+          ],
+        ));
   }
 }
