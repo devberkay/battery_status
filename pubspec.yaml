@@ -25,6 +25,7 @@ dependencies:
   loader_overlay: any
   liquid_progress_indicator: ^0.4.0
   
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
