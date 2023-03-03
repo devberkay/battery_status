@@ -27,7 +27,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                       child: SizedBox(),
                     ),
                     Expanded(flex: 2, child: ChargingBar()),
-                    Expanded(flex: 4,child: SizedBox(),)
+                    Expanded(
+                      flex: 4,
+                      child: SizedBox(),
+                    )
                   ],
                 )),
             const Spacer(
