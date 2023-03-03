@@ -1,3 +1,4 @@
+import 'package:BatteryStatus/view/shared/flushbar_util.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -23,23 +24,10 @@ class Faq extends HookConsumerWidget {
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
         onPressed: () {
-          Flushbar(
-            message: "Developed by github.com/devberkay",
-            messageSize: usableWidth * 0.035,
-            maxWidth: usableWidth * 0.75,
-            borderRadius: BorderRadius.circular(usableHeight * 0.1),
-            mainButton: TextButton(
-                onPressed: () {
-                  context.pop();
-                },
-                style:
-                    TextButton.styleFrom(splashFactory: NoSplash.splashFactory),
-                child: Text("Dismiss",
-                    style: TextStyle(
-                        fontSize: usableWidth * 0.03,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold))),
-          ).show(context);
+          FlashbarUtil.showUtilFlashbar( // Custom class to enhance reusability of the shared widgets.
+              context: context,
+              msg: "Made by devberkay",
+              actionMsg: "Dismiss");
         },
         color: Colors.grey,
       );

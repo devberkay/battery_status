@@ -1,9 +1,10 @@
+import 'package:BatteryStatus/model/provider/notification/notification_notifier.dart';
+import 'package:BatteryStatus/view/shared/flushbar_util.dart';
+import 'package:another_flushbar/flushbar.dart';
+import 'package:another_flushbar/flushbar_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final notificationProvider = StateProvider.autoDispose<bool>((ref) {
-  return false;
-});
 
 class NotificationBell extends HookConsumerWidget {
   const NotificationBell({super.key});
@@ -25,7 +26,16 @@ class NotificationBell extends HookConsumerWidget {
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
         onPressed: () {
-          ref.read(notificationProvider.notifier).state = !isAllowed;
+          ref.read(notificationProvider.notifier).toggle();
+          FlashbarUtil.showUtilFlashbar(
+              // Custom class to enhance reusability of the shared widgets.
+              context: context,
+              leftBarIndicatorColor:
+                  isAllowed ? Colors.lightGreenAccent : Colors.redAccent,
+              msg: isAllowed
+                  ? "Notifications are active"
+                  : "Notifications are inactive",
+              actionMsg: "Dismiss");
         },
         color: Colors.grey,
       );
