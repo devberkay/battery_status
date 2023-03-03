@@ -27,20 +27,21 @@ class Faq extends HookConsumerWidget {
             message: "Developed by github.com/devberkay",
             messageSize: usableWidth * 0.035,
             padding: EdgeInsets.symmetric(horizontal: usableWidth * 0.025),
-            maxWidth: usableWidth * 0.85,
+            maxWidth: usableWidth * 0.6,
             borderRadius: BorderRadius.circular(usableHeight * 0.1),
             margin: EdgeInsets.only(
-                bottom: usableHeight * 0.025,
-                left: usableWidth % 0.075,
-                right: usableWidth * 0.075),
+                bottom: usableHeight * 0.04,
+                left: usableWidth % 0.2,
+                right: usableWidth * 0.2),
             mainButton: TextButton(
                 onPressed: () {
                   context.pop();
                 },
-                style: TextButton.styleFrom(splashFactory: NoSplash.splashFactory),
+                style:
+                    TextButton.styleFrom(splashFactory: NoSplash.splashFactory),
                 child: Text("Dismiss",
                     style: TextStyle(
-                        fontSize: usableWidth * 0.04,
+                        fontSize: usableWidth * 0.03,
                         color: Colors.white,
                         fontWeight: FontWeight.bold))),
           ).show(context);
