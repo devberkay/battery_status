@@ -10,7 +10,8 @@ class ActionButton extends HookConsumerWidget {
   const ActionButton({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isExpose = useState(false); // true for expose , false for hide
+    final isExpose =
+        ref.watch(isExposeProvider); // true for expose , false for hide
     return LayoutBuilder(builder: (context, constraints) {
       return TextButton(
           onPressed: () {
@@ -20,14 +21,14 @@ class ActionButton extends HookConsumerWidget {
           style: ButtonStyle(
               splashFactory: InkRipple.splashFactory,
               foregroundColor: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.pressed) || isExpose.value) {
+                if (isExpose) {
                   return Colors.red;
                 } else {
                   return Colors.green;
                 }
               }),
               shape: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.pressed) || isExpose.value) {
+                if (isExpose) {
                   return RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(constraints.maxHeight * 0.5),
@@ -44,7 +45,7 @@ class ActionButton extends HookConsumerWidget {
                 }
               }),
               backgroundColor: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.pressed) || isExpose.value) {
+                if (isExpose) {
                   return Colors.white;
                 } else {
                   return Colors.white;
@@ -53,7 +54,8 @@ class ActionButton extends HookConsumerWidget {
               fixedSize: MaterialStatePropertyAll(
                   Size(constraints.maxWidth, constraints.maxHeight))),
           child: Text(
-           isExpose ? "Check Battery Level" : "Stop Listening Battery Level",
+            isExpose ? "Stop Listening" : "Check Battery Level",
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: constraints.maxHeight * 0.25),
           ));
     });
