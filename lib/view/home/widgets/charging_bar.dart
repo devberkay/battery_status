@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'dart:math';
 
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
@@ -30,31 +31,36 @@ class ChargingBar extends HookConsumerWidget {
     final percentageController = useAnimationController(
         duration: Duration(milliseconds: 1000), initialValue: randomNo);
     useEffect(() {
-      percentageController.forward();
+      percentageController.animateTo(randomNo);
     });
     return LayoutBuilder(builder: (context, constraints) {
       return SizedBox(
         height: constraints.maxHeight,
         width: constraints.maxWidth,
-        child: LiquidLinearProgressIndicator(
-          value: randomNo,
-          primaryChild: Padding(
-            padding: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
-            child: Text(
-              "%${(randomNo * 100).toStringAsFixed(2)}",
-              style: TextStyle(
-                  fontSize: constraints.maxWidth * 0.15,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          secondaryChild:
-              Icon(Icons.bolt_sharp, size: constraints.maxWidth * 0.5),
-          borderRadius: constraints.maxHeight * 0.25,
-          direction: Axis.vertical,
-          borderWidth: constraints.maxHeight * 0.01,
-          backgroundColor: Colors.grey.shade400,
-          borderColor: Colors.white,
-          valueColor: const AlwaysStoppedAnimation(Colors.white),
+        child: AnimatedBuilder(
+          animation: percentageController,
+          builder: (context,child) {
+            return LiquidLinearProgressIndicator(
+              value: randomNo,
+              primaryChild: Padding(
+                padding: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
+                child: Text(
+                  "%${(randomNo * 100).toStringAsFixed(2)}",
+                  style: TextStyle(
+                      fontSize: constraints.maxWidth * 0.15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              secondaryChild:
+                  Icon(Icons.bolt_sharp, size: constraints.maxWidth * 0.5),
+              borderRadius: constraints.maxHeight * 0.25,
+              direction: Axis.vertical,
+              borderWidth: constraints.maxHeight * 0.01,
+              backgroundColor: Colors.grey.shade400,
+              borderColor: Colors.white,
+              valueColor: Animation(),
+            );
+          }
         ),
       );
     });
