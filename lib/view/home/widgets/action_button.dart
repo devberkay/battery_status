@@ -12,7 +12,7 @@ class ActionButton extends HookConsumerWidget {
     return TextButton(onPressed: () {
       ref.read(isExposeProvider.notifier).state = !ref.read(isExposeProvider.notifier).state;
     }, child: Text("Check Battery Level"),style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.
-    ),);
+      backgroundColor: MaterialStateProperty.resolveWith((states) => null)
+    ));
   }
 }
