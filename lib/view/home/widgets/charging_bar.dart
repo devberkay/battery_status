@@ -27,7 +27,11 @@ class ChargingBar extends HookConsumerWidget {
     final isMonitoring =
         ref.watch(isMonitoringProvider); // true for expose , false for hide
     final randomNo = ref.watch(batteryPercentageProvider).asData?.value ?? 0.5;
-    final percentageController = useAnimationController(duration: Duration(milliseconds: 1000),)
+    final percentageController = useAnimationController(
+        duration: Duration(milliseconds: 1000), initialValue: randomNo);
+    useEffect(() {
+      percentageController.forward();
+    });
     return LayoutBuilder(builder: (context, constraints) {
       return SizedBox(
         height: constraints.maxHeight,
