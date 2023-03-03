@@ -17,9 +17,9 @@ class _HomePageState extends ConsumerState<HomePage> {
         padding: EdgeInsets.zero,
         child: Column(
           children: [
-            const Spacer(flex: 20),
+            const Spacer(flex: 15),
             Expanded(
-                flex: 32,
+                flex: 42,
                 child: Row(
                   children: const [
                     Spacer(
@@ -30,10 +30,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ],
                 )),
             const Spacer(
-              flex: 20,
+              flex: 15,
             ),
             Expanded(
-              flex: 8,
+              flex: 13,
               child: Row(
                 children: const [
                   Spacer(
@@ -44,7 +44,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ],
               ),
             ),
-            const Spacer(flex: 20)
+            const Spacer(flex: 15)
           ],
         ));
   }

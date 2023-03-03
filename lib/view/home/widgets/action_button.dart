@@ -64,14 +64,14 @@ class ActionButton extends HookConsumerWidget {
               ),
               Icon(
                 isMonitoring ? Icons.front_hand_sharp : Icons.rss_feed_sharp,
-                size: constraints.maxHeight * 0.375,
+                size: constraints.maxWidth * 0.08,
                 color: isMonitoring ? Colors.grey : Colors.black,
               ),
               const Spacer(),
               Text(
                 isMonitoring ? "Stop Monitoring" : "Check Battery Level",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: constraints.maxHeight * 0.325),
+                style: TextStyle(fontSize: constraints.maxWidth * 0.075),
               ),
               const Spacer(
                 flex: 6,
