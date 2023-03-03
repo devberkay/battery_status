@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -5,7 +8,9 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 final batteryPercentageProvider =
     StreamProvider.autoDispose<double>((ref) async* {
-  yield 0.34;
+  Stream.periodic(const Duration(milliseconds: 5000), (ms) async* {
+    yield Random.secure().nextDouble();
+  });
 });
 
 class ChargingBar extends HookConsumerWidget {
@@ -20,7 +25,11 @@ class ChargingBar extends HookConsumerWidget {
         height: constraints.maxHeight,
         width: constraints.maxWidth,
         child: LiquidLinearProgressIndicator(
-          
+          primaryChild: Padding(
+            padding:  EdgeInsets.only(bottom: constraints.maxHeight*0.05),
+            child: Text("%${ref.watch(batteryPercentageProvider).asData?.value ?? 0.5}",style: TextStyle(fontSize: constraints.maxWidth*0.15),),
+          ),
+          secondaryChild: Icon(Icons.bolt_sharp,size: constraints.maxWidth*0.5) ,
           borderRadius: constraints.maxHeight * 0.25,
           direction: Axis.vertical,
           borderWidth: constraints.maxHeight * 0.01,
