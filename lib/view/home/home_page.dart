@@ -22,11 +22,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                 flex: 42,
                 child: Row(
                   children: const [
-                    Spacer(
+                    Expanded(
                       flex: 4,
+                      child: SizedBox(),
                     ),
                     Expanded(flex: 2, child: ChargingBar()),
-                    Spacer(flex: 4)
+                    Expanded(flex: 4,child: SizedBox(),)
                   ],
                 )),
             const Spacer(
