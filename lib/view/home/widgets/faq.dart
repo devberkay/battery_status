@@ -12,13 +12,12 @@ class Faq extends HookConsumerWidget {
           size: constraints.maxWidth * 0.3,
         ),
         style: IconButton.styleFrom(
+            splashFactory: InkSparkle.splashFactory,
             fixedSize:
                 Size(constraints.maxWidth * 0.6, constraints.maxWidth * 0.6),
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
-        onPressed: () {
-          
-        },
+        onPressed: () {},
         color: Colors.grey,
       );
     });
