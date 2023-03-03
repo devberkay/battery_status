@@ -19,6 +19,7 @@ class ActionButton extends HookConsumerWidget {
                 !ref.read(isMonitoringProvider.notifier).state;
           },
           style: ButtonStyle(
+              padding: MaterialStatePropertyAll(EdgeInsets.zero),
               alignment: Alignment.center,
               splashFactory: InkRipple.splashFactory,
               overlayColor: MaterialStatePropertyAll(Colors.grey.shade400),
@@ -63,7 +64,7 @@ class ActionButton extends HookConsumerWidget {
                 flex: 6,
               ),
               Icon(
-                isMonitoring ? Icons.front_hand_sharp : Icons.rss_feed_sharp,
+                isMonitoring ? Icons.front_hand_sharp : Icons.bolt_sharp,
                 size: constraints.maxWidth * 0.08,
                 color: isMonitoring ? Colors.grey : Colors.black,
               ),
