@@ -42,7 +42,7 @@ class ActionButton extends HookConsumerWidget {
                       borderRadius:
                           BorderRadius.circular(constraints.maxHeight * 0.5),
                       side: BorderSide(
-                          color: Colors.black,
+                          color: Colors.transparent,
                           width: constraints.maxHeight * 0.05));
                 }
               }),
