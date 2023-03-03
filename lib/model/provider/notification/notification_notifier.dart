@@ -1,6 +1,16 @@
-class NotificationNotifier extends Notifier<> {
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final notificationProvider =
+    NotifierProvider.autoDispose<NotificationNotifier, bool>(NotificationNotifier.new);
+
+class NotificationNotifier extends AutoDisposeNotifier<bool> {
   @override
-   build() {
-    return ;
+  bool build() {
+    // isar code
+    return false;
+  }
+
+  void toggle() {
+    state = !state;
   }
 }
