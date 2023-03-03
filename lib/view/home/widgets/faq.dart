@@ -16,7 +16,9 @@ class Faq extends HookConsumerWidget {
                 Size(constraints.maxWidth * 0.6, constraints.maxWidth * 0.6),
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
-        onPressed: () {},
+        onPressed: () {
+          
+        },
         color: Colors.grey,
       );
     });
