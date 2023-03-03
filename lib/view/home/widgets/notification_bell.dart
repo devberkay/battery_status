@@ -33,8 +33,8 @@ class NotificationBell extends HookConsumerWidget {
               leftBarIndicatorColor:
                   isAllowed ? Colors.lightGreenAccent : Colors.redAccent,
               msg: isAllowed
-                  ? "Notifications are active"
-                  : "Notifications are inactive",
+                  ? "Notifications are inactive"
+                  : "Notifications are active",
               actionMsg: "Dismiss");
         },
         color: Colors.grey,
