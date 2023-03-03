@@ -56,12 +56,23 @@ class ActionButton extends HookConsumerWidget {
                   Size(constraints.maxWidth, constraints.maxHeight))),
           child: Row(
             children: [
-              Icon(Icons.front_hand_sharp,size: constraints.maxHeight*0.15,)
+              Spacer(
+                flex: 6,
+              ),
+              Icon(
+                Icons.front_hand_sharp,
+                size: constraints.maxHeight * 0.25,
+                color: isMonitoring ? Colors.grey : Colors.transparent,
+              ),
+              Spacer(),
               Text(
                 isMonitoring ? "Stop Monitoring" : "Check Battery Level",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: constraints.maxHeight * 0.25),
               ),
+              Spacer(
+                flex: 6,
+              )
             ],
           ));
     });
