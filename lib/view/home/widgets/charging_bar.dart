@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
+final batteryPercentageProvider =
+    StreamProvider.autoDispose<double>((ref) async* {
+  yield 0.34;
+});
+
 class ChargingBar extends HookConsumerWidget {
   const ChargingBar({super.key});
   @override
@@ -15,10 +20,15 @@ class ChargingBar extends HookConsumerWidget {
         height: constraints.maxHeight,
         width: constraints.maxWidth,
         child: LiquidLinearProgressIndicator(
+          center: Text(
+            "%${ref.watch(batteryPercentageProvider).asData?.value ?? 0.5}",
+            style: TextStyle(fontSize: constraints.maxWidth * 0.25),
+          ),
+          borderRadius: constraints.maxHeight * 0.25,
           direction: Axis.vertical,
-          borderWidth: constraints.maxHeight * 0.025,
+          borderWidth: constraints.maxHeight * 0.01,
           backgroundColor: Colors.grey.shade400,
-          borderColor: isMonitoring ? Colors.red : Colors.green,
+          borderColor: Colors.white,
           valueColor: const AlwaysStoppedAnimation(Colors.white),
         ),
       );

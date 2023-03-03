@@ -23,10 +23,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: Row(
                   children: const [
                     Spacer(
-                      flex: 45,
+                      flex: 4,
                     ),
-                    Expanded(flex: 10, child: ChargingBar()),
-                    Spacer(flex: 45)
+                    Expanded(flex: 2, child: ChargingBar()),
+                    Spacer(flex: 4)
                   ],
                 )),
             const Spacer(
