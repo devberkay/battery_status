@@ -18,11 +18,11 @@ class _HomePageState extends ConsumerState<HomePage> {
           children: [
             const Spacer(flex: 20),
             const Expanded(
-              flex: 30,
+              flex: 32,
               child: SizedBox(),
             ),
             Expanded(
-              flex: 10,
+              flex: 8,
               child: Row(
                 children: const [
                   Spacer(
