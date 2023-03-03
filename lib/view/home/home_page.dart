@@ -1,4 +1,5 @@
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
+import 'package:BatteryStatus/view/home/widgets/charging_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,9 +18,19 @@ class _HomePageState extends ConsumerState<HomePage> {
         child: Column(
           children: [
             const Spacer(flex: 20),
-            const Expanded(
-              flex: 32,
-              child: SizedBox(),
+            Expanded(
+                flex: 32,
+                child: Row(
+                  children: const [
+                    Spacer(
+                      flex: 45,
+                    ),
+                    Expanded(flex: 10, child: ChargingBar()),
+                    Spacer(flex: 45)
+                  ],
+                )),
+            const Spacer(
+              flex: 20,
             ),
             Expanded(
               flex: 8,
