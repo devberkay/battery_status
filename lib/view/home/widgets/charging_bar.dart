@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
@@ -51,9 +52,16 @@ class ChargingBar extends HookConsumerWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                secondaryChild: Icon(
-                    isMonitoring ? Icons.bolt_sharp : Icons.question_mark_sharp,
-                    size: constraints.maxWidth * 0.5),
+                secondaryChild: isMonitoring
+                    ? Icon(
+                        Icons.bolt_sharp,
+                        size: constraints.maxWidth * 0.5,
+                        color: Colors.black,
+                      )
+                    : SpinKitThreeBounce(
+                        color: Colors.black,
+                        size: constraints.maxWidth * 0.4,
+                      ),
                 borderRadius: constraints.maxHeight * 0.25,
                 direction: Axis.vertical,
                 borderWidth: constraints.maxHeight * 0.01,
