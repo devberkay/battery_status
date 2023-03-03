@@ -47,12 +47,13 @@ class ChargingBar extends HookConsumerWidget {
                   child: Text(
                     "%${(randomNo * 100).toStringAsFixed(2)}",
                     style: TextStyle(
-                        fontSize: constraints.maxWidth * 0.15,
+                        fontSize: constraints.maxWidth * 0.16,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                secondaryChild:
-                    Icon(Icons.bolt_sharp, size: constraints.maxWidth * 0.5),
+                secondaryChild: Icon(
+                    isMonitoring ? Icons.bolt_sharp : Icons.question_mark_sharp,
+                    size: constraints.maxWidth * 0.5),
                 borderRadius: constraints.maxHeight * 0.25,
                 direction: Axis.vertical,
                 borderWidth: constraints.maxHeight * 0.01,
