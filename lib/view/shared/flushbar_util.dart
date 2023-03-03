@@ -14,7 +14,7 @@ class FlashbarUtil {
       leftBarIndicatorColor: leftBarIndicatorColor,
       duration: const Duration(milliseconds: 3000),
       message: msg,
-      messageSize: usableWidth * 0.04,
+      messageSize: usableWidth * 0.035,
       maxWidth: usableWidth * 0.7,
       padding: EdgeInsets.symmetric(
           horizontal: usableWidth * .05, vertical: usableHeight * 0.01),

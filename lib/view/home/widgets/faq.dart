@@ -27,6 +27,7 @@ class Faq extends HookConsumerWidget {
           FlashbarUtil.showUtilFlashbar( // Custom class to enhance reusability of the shared widgets.
               context: context,
               msg: "Made by devberkay",
+              leftBarIndicatorColor: Colors.white,
               actionMsg: "Dismiss");
         },
         color: Colors.grey,
