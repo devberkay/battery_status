@@ -12,9 +12,8 @@ class Faq extends HookConsumerWidget {
           size: constraints.maxWidth * 0.3,
         ),
         style: IconButton.styleFrom(
-          
             fixedSize:
-                Size(constraints.maxWidth * 0.3, constraints.maxWidth * 0.3),
+                Size(constraints.maxWidth * 0.6, constraints.maxWidth * 0.6),
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
         onPressed: () {},
