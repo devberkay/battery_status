@@ -20,10 +20,7 @@ class ChargingBar extends HookConsumerWidget {
         height: constraints.maxHeight,
         width: constraints.maxWidth,
         child: LiquidLinearProgressIndicator(
-          center: Text(
-            "%${ref.watch(batteryPercentageProvider).asData?.value ?? 0.5}",
-            style: TextStyle(fontSize: constraints.maxWidth * 0.25),
-          ),
+          
           borderRadius: constraints.maxHeight * 0.25,
           direction: Axis.vertical,
           borderWidth: constraints.maxHeight * 0.01,
