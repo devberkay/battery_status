@@ -10,7 +10,9 @@ class ActionButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextButton(onPressed: () {
-      ref.read(isExposeProvider.notifier).state = !ref.read(isExposeProvider).state;
-    }, child: Text(""));
+      ref.read(isExposeProvider.notifier).state = !ref.read(isExposeProvider.notifier).state;
+    }, child: Text("Check Battery Level"),style: ButtonStyle(
+      backgroundColor: MaterialStateProperty
+    ),);
   }
 }
