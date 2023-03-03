@@ -7,6 +7,7 @@ class Faq extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(builder: (context, constraints) {
       return IconButton(
+        splashRadius: constraints.maxWidth * 0.3,
         icon: Icon(
           Icons.code,
           size: constraints.maxWidth * 0.3,
@@ -14,7 +15,7 @@ class Faq extends HookConsumerWidget {
         style: IconButton.styleFrom(
             splashFactory: InkSparkle.splashFactory,
             fixedSize:
-                Size(constraints.maxWidth * 0.4, constraints.maxWidth * 0.4),
+                Size(constraints.maxWidth * 0.6, constraints.maxWidth * 0.6),
             padding: EdgeInsets.zero,
             alignment: Alignment.center),
         onPressed: () {},

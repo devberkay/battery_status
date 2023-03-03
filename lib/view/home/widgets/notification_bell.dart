@@ -12,6 +12,7 @@ class NotificationBell extends HookConsumerWidget {
     final isAllowed = ref.watch(notificationProvider);
     return LayoutBuilder(builder: (context, constraints) {
       return IconButton(
+        splashRadius: constraints.maxWidth * 0.3,
         icon: Icon(
           isAllowed
               ? Icons.notifications_active_sharp

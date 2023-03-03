@@ -21,7 +21,7 @@ class ActionButton extends HookConsumerWidget {
           style: ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.zero),
               alignment: Alignment.center,
-              splashFactory: InkRipple.splashFactory,
+              splashFactory: InkSparkle.splashFactory,
               overlayColor: MaterialStatePropertyAll(Colors.grey.shade400),
               foregroundColor: MaterialStateProperty.resolveWith((states) {
                 if (isMonitoring) {
