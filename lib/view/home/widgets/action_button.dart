@@ -16,9 +16,14 @@ class ActionButton extends HookConsumerWidget {
   Future<MonitoringState> _monitorBatteryLevel(WidgetRef ref) async {
     try {
       final batteryPercentage = await platform.invokeMethod('getBatteryLevel');
+      ref.read(isMonitoringProvider.notifier).state =
+               true;
       return MonitoringState.success(
           batteryPercentage, "Current battery is $batteryPercentage");
+      
     } on PlatformException catch (e) {
+      ref.read(isMonitoringProvider.notifier).state =
+                false;
       return MonitoringState.fail(e.message ?? "Failed to check battery status");
     }
   }
@@ -31,8 +36,7 @@ class ActionButton extends HookConsumerWidget {
       return TextButton(
           onPressed: () {
             _monitorBatteryLevel(ref);
-            ref.read(isMonitoringProvider.notifier).state =
-                !ref.read(isMonitoringProvider.notifier).state;
+            
           },
           style: ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.zero),
