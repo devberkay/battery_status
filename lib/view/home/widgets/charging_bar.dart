@@ -11,7 +11,7 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 final batteryPercentageProvider =
     StreamProvider.autoDispose<int?>((ref) async* {
-  final isMonitoring = ref.watch(isMonitoringProvider);
+  
   final periodicStream =
       Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
     yield await ref
@@ -31,15 +31,15 @@ class ChargingBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMonitoring =
         ref.watch(isMonitoringProvider); // true for expose , false for hide
-    final randomNo = ref.watch(batteryPercentageProvider).asData?.value ??
+    final batteryPercentage = ref.watch(batteryPercentageProvider).asData?.value ??
         Random.secure().nextInt(101);
     final percentageController = useAnimationController(
         upperBound: 100,
         lowerBound: 0,
         duration: const Duration(milliseconds: 1000),
-        initialValue: randomNo.toDouble());
+        initialValue: batteryPercentage.toDouble());
     useEffect(() {
-      percentageController.animateTo(randomNo.toDouble());
+      percentageController.animateTo(batteryPercentage.toDouble());
     });
     return LayoutBuilder(builder: (context, constraints) {
       return SizedBox(
@@ -54,7 +54,7 @@ class ChargingBar extends HookConsumerWidget {
                   padding:
                       EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
                   child: Text(
-                    "${randomNo.toStringAsFixed(0)}%",
+                    "${batteryPercentage.toStringAsFixed(0)}%",
                     style: TextStyle(
                         fontSize: constraints.maxWidth * 0.16,
                         fontWeight: FontWeight.bold),

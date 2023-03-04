@@ -1,3 +1,4 @@
+import 'package:BatteryStatus/model/data/monitoring_state.dart';
 import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart';
 import 'package:BatteryStatus/view/shared/flushbar_util.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class SharedScaffold extends StatefulHookConsumerWidget {
 class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
   @override
   Widget build(BuildContext context) {
-    ref.listen(monitoringNotifierProvider, (previous, next) {
+    ref.listen<MonitoringState>(monitoringNotifierProvider, (previous, next) {
       if (next != previous) {
         next.when(
             monitoring: FlashbarUtil.showUtilFlashbar(
