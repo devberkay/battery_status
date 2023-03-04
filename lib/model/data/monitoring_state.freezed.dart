@@ -19,19 +19,19 @@ mixin _$MonitoringState {
   String? get msg => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(double battery, String? msg) success,
+    required TResult Function(int battery, String? msg) success,
     required TResult Function(String msg) fail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(double battery, String? msg)? success,
+    TResult? Function(int battery, String? msg)? success,
     TResult? Function(String msg)? fail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double battery, String? msg)? success,
+    TResult Function(int battery, String? msg)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) =>
@@ -101,7 +101,7 @@ abstract class _$$SuccessCopyWith<$Res>
       __$$SuccessCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double battery, String? msg});
+  $Res call({int battery, String? msg});
 }
 
 /// @nodoc
@@ -121,7 +121,7 @@ class __$$SuccessCopyWithImpl<$Res>
       null == battery
           ? _value.battery
           : battery // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       freezed == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ class _$Success implements Success {
   const _$Success(this.battery, [this.msg]);
 
   @override
-  final double battery;
+  final int battery;
   @override
   final String? msg;
 
@@ -166,7 +166,7 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(double battery, String? msg) success,
+    required TResult Function(int battery, String? msg) success,
     required TResult Function(String msg) fail,
   }) {
     return success(battery, msg);
@@ -175,7 +175,7 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(double battery, String? msg)? success,
+    TResult? Function(int battery, String? msg)? success,
     TResult? Function(String msg)? fail,
   }) {
     return success?.call(battery, msg);
@@ -184,7 +184,7 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double battery, String? msg)? success,
+    TResult Function(int battery, String? msg)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -227,9 +227,9 @@ class _$Success implements Success {
 }
 
 abstract class Success implements MonitoringState {
-  const factory Success(final double battery, [final String? msg]) = _$Success;
+  const factory Success(final int battery, [final String? msg]) = _$Success;
 
-  double get battery;
+  int get battery;
   @override
   String? get msg;
   @override
@@ -301,7 +301,7 @@ class _$Fail implements Fail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(double battery, String? msg) success,
+    required TResult Function(int battery, String? msg) success,
     required TResult Function(String msg) fail,
   }) {
     return fail(msg);
@@ -310,7 +310,7 @@ class _$Fail implements Fail {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(double battery, String? msg)? success,
+    TResult? Function(int battery, String? msg)? success,
     TResult? Function(String msg)? fail,
   }) {
     return fail?.call(msg);
@@ -319,7 +319,7 @@ class _$Fail implements Fail {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double battery, String? msg)? success,
+    TResult Function(int battery, String? msg)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
