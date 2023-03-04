@@ -50,14 +50,11 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
   }
 
   Stream<int> buildWithRandomPercentage() async* {
-    final periodicStream =
+    final streamSub =
         Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
       yield Random.secure().nextInt(101);
+    }).listen((event) {
+      
     });
-    await for (var streamController in periodicStream) {
-      await for (var randomInt in streamController) {
-        yield randomInt;
-      }
-    }
   }
 }
