@@ -21,11 +21,11 @@ class ActionButton extends HookConsumerWidget {
       return TextButton(
           onPressed: () {
             if (isMonitoring) {
-              
+              ref.read(monitoringNotifierProvider.notifier).deactivate();
             } else {
               ref
-                  .read(batteryNotifierProvider.notifier)
-                  .buildWithRealPercentage();
+                  .read(monitoringNotifierProvider.notifier)
+                  .monitorBatteryLevel();
             }
           },
           style: ButtonStyle(

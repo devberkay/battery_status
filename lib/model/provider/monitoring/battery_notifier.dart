@@ -11,12 +11,26 @@ final batteryNotifierProvider =
 class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
   @override
   Stream<int> build() async* {
-    ref.watch(monitoringNotifierProvider).when(
-        monitoring: (batteryPercentage, msg) async* {
-      yield buildWithRealPercentage();
-    }, idle: (msg) async*{
-      yield buildWithRandomPercentage();
+    final isMonitoring = ref.watch(monitoringNotifierProvider).when(
+        monitoring: (batteryPercentage, msg) {
+      return true;
+    }, idle: (msg) {
+      return false;
     });
+
+
+    if (isMonitoring) {
+  await for (var element in buildWithRealPercentage()) {
+    yield element;
+  }
+}
+
+    else {
+      await for (var element in buildWithRandomPercentage()) {
+      yield element;
+    }
+    }
+    
   }
 
   Stream<int> buildWithRealPercentage() async* {
@@ -24,7 +38,7 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
         Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
       yield await ref
           .read(monitoringNotifierProvider.notifier)
-          .monitorBatteryLevel(ref);
+          .monitorBatteryLevel();
     });
     await for (var streamController in periodicStream) {
       await for (var randomInt in streamController) {
