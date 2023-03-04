@@ -24,6 +24,7 @@ class MonitoringNotifier extends AutoDisposeNotifier<MonitoringState> {
       return batteryPercentage;
     } on PlatformException catch (e) {
       // ref.read(isMonitoringProvider.notifier).state = false;
+      
       state = MonitoringState.idle(
           e.message ?? "Battery can't be monitored at the moment");
       return null;
