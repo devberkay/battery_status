@@ -14,8 +14,7 @@ class ActionButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final isMonitoring =
-    //     ref.watch(isMonitoringProvider); // true for expose , false for hide
+    
     final isMonitoring = ref.watch(monitoringNotifierProvider).when(
         monitoring: (batteryPercentage, msg) => true, idle: (msg) => false);
     return LayoutBuilder(builder: (context, constraints) {
