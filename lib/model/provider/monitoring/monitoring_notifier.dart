@@ -13,7 +13,7 @@ class MonitoringNotifier extends AutoDisposeNotifier<MonitoringState> {
     return const MonitoringState.idle();
   }
 
-  Future<int?> monitorBatteryLevel() async {
+  Future<MonitoringState> monitorBatteryLevel() async {
     const platform = MethodChannel('berkaycan.dev/battery');
     try {
       final batteryPercentage =
@@ -21,12 +21,12 @@ class MonitoringNotifier extends AutoDisposeNotifier<MonitoringState> {
       // ref.read(isMonitoringProvider.notifier).state = true;
       state = MonitoringState.monitoring(
           batteryPercentage, "Current battery is $batteryPercentage%");
-      return batteryPercentage;
+      return state;
     } on PlatformException catch (e) {
       // ref.read(isMonitoringProvider.notifier).state = false;
       state = MonitoringState.idle(
           e.message ?? "Battery can't be monitored at the moment");
-      return null;
+      return state;
     }
   }
 

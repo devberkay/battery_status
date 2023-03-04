@@ -5,13 +5,13 @@ import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final batteryNotifierProvider =
-    StreamNotifierProvider.autoDispose<BatteryNotifier, int>(
+    StreamNotifierProvider.autoDispose<BatteryNotifier, int?>(
         BatteryNotifier.new);
 
-class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
-  late final StreamSubscription streamSub;
+class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
+  late final StreamSubscription<int?> streamSub;
   @override
-  Stream<int> build() async* {
+  Stream<int?> build() async* {
     ref.onDispose(() async {
       await streamSub.cancel();
     });
@@ -23,26 +23,30 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
     });
 
     if (isMonitoring) {
-      await for (var element in buildWithRealPercentage()) {
-        yield element;
-      }
+      streamSub = buildWithRealPercentage().listen((event) {
+        if (event == null) {
+          ref.refresh(monitoringNotifierProvider);
+          ref.invalidateSelf();
+        }
+        state = AsyncData(event);
+      });
     } else {
-      await for (var element in buildWithRandomPercentage()) {
-        yield element;
-      }
+      streamSub = buildWithRandomPercentage().listen((event) {
+        state = AsyncData(event);
+      });
     }
   }
 
-  Stream<int> buildWithRealPercentage() async* {
+  Stream<int?> buildWithRealPercentage() async* {
     while (true) {
       final response = await ref
           .read(monitoringNotifierProvider.notifier)
           .monitorBatteryLevel();
-      if (response != null) {
-        yield response;
-      } else {
-        
-      }
+      yield response.when(monitoring: (batteryPercentage, msg) {
+        return batteryPercentage;
+      }, idle: (msg) {
+        return null;
+      });
       await Future.delayed(const Duration(milliseconds: 5000));
     }
   }
