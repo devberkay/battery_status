@@ -21,9 +21,9 @@ class ActionButton extends HookConsumerWidget {
       return TextButton(
           onPressed: () {
             if (isMonitoring) {
-              ref.read(monitoringStateProvider.notifier).state= const MonitoringState.idle("Mock battery percentage is being shown.");
+              ref.read(monitoringStateProvider.notifier).state= const MonitoringState.idle("Mock battery is shown");
             } else {
-              ref.read(monitoringStateProvider.notifier).state= const MonitoringState.monitoring("Device battery percentage is being shown.");
+              ref.read(monitoringStateProvider.notifier).state= const MonitoringState.monitoring("Device battery is shown");
             }
           },
           style: ButtonStyle(
