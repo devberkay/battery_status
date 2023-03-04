@@ -1,3 +1,4 @@
+import 'package:BatteryStatus/model/data/monitoring_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -12,10 +13,14 @@ class ActionButton extends HookConsumerWidget {
   static const platform = MethodChannel('berkaycan.dev/battery');
   // Get battery level.
 
-  Future<void> _monitorBatteryLevel(WidgetRef ref) async {
+  Future<MonitoringState> _monitorBatteryLevel(WidgetRef ref) async {
     try {
-      return await platform.invokeMethod('getBatteryLevel');
-    } on PlatformException catch (e) {}
+      final batteryPercentage = await platform.invokeMethod('getBatteryLevel');
+      return MonitoringState.success(
+          batteryPercentage, "Current battery is $batteryPercentage");
+    } on PlatformException catch (e) {
+      return MonitoringState.fail(e.message ?? "Failed to check battery status");
+    }
   }
 
   @override

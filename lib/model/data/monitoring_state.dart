@@ -4,10 +4,7 @@ part 'monitoring_state.freezed.dart';
 
 @freezed
 class MonitoringState with _$MonitoringState {
-  const factory MonitoringState.white(String? letter) = White;
-  const factory MonitoringState.grey(String letter) = Grey;
-  const factory MonitoringState.yellow(String letter) = Yellow;
-  const factory MonitoringState.green(String letter) = Green;
-  
-  
+  const factory MonitoringState.success(double battery, [String? msg]) =
+      Success;
+  const factory MonitoringState.fail(String msg) = Fail;
 }
