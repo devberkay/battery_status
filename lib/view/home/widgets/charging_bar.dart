@@ -42,7 +42,7 @@ class ChargingBar extends HookConsumerWidget {
         initialValue: batteryPercentage.toDouble());
     useEffect(() {
       percentageController.animateTo(batteryPercentage.toDouble());
-    });
+    },[batteryPercentage]);
     return LayoutBuilder(builder: (context, constraints) {
       return SizedBox(
         height: constraints.maxHeight,
@@ -51,7 +51,7 @@ class ChargingBar extends HookConsumerWidget {
             animation: percentageController,
             builder: (context, child) {
               return LiquidLinearProgressIndicator(
-                value: percentageController.value,
+                value: percentageController.value/100,
                 primaryChild: Padding(
                   padding:
                       EdgeInsets.only(bottom: constraints.maxHeight * 0.05),

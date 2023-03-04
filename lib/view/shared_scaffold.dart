@@ -20,17 +20,19 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
   Widget build(BuildContext context) {
     ref.listen<MonitoringState>(monitoringNotifierProvider, (previous, next) {
       if (next != previous) {
-        next.when(
-            monitoring: FlashbarUtil.showUtilFlashbar(
-                context: context,
-                msg: next.msg ?? "Battery is being shown on the bar",
-                leftBarIndicatorColor: Colors.lightGreenAccent,
-                actionMsg: "Dismiss"),
-            idle: FlashbarUtil.showUtilFlashbar(
-                context: context,
-                leftBarIndicatorColor: Colors.redAccent,
-                msg: next.msg ?? "Battery can't be monitored at the moment",
-                actionMsg: "Dismiss"));
+        next.when(monitoring: (percentage, msg) {
+          FlashbarUtil.showUtilFlashbar(
+              context: context,
+              msg: next.msg ?? "Battery is being shown on the bar",
+              leftBarIndicatorColor: Colors.lightGreenAccent,
+              actionMsg: "Dismiss");
+        }, idle: (msg) {
+          FlashbarUtil.showUtilFlashbar(
+              context: context,
+              leftBarIndicatorColor: Colors.redAccent,
+              msg: next.msg ?? "Battery can't be monitored at the moment",
+              actionMsg: "Dismiss");
+        });
       }
     });
     return SafeArea(
