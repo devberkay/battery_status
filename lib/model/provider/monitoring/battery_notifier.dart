@@ -22,7 +22,7 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
   Stream<int?> buildWithRealPercentage() async* {
     const platform = MethodChannel('berkaycan.dev/battery');
     try {
-      yield* Stream.periodic(const Duration(milliseconds: 5000), (_) {
+      yield* Stream.periodic(const Duration(milliseconds: 0), (_) {
         return platform.invokeMethod('getBatteryLevel');
       }).asyncMap((event) async => await event);
     } catch (e) {
@@ -31,7 +31,7 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
   }
 
   Stream<int> buildWithRandomPercentage() async* {
-    yield* Stream.periodic(const Duration(milliseconds: 5000), (_) {
+    yield* Stream.periodic(const Duration(milliseconds: 3000), (_) {
       return Random.secure().nextInt(101);
     });
   }
