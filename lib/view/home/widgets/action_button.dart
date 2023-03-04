@@ -11,16 +11,11 @@ class ActionButton extends HookConsumerWidget {
   const ActionButton({super.key});
   static const platform = MethodChannel('berkaycan.dev/battery');
   // Get battery level.
-   
 
-  Future<void> _getBatteryLevel() async {
-    
+  Future<void> _monitorBatteryLevel(WidgetRef ref) async {
     try {
       return await platform.invokeMethod('getBatteryLevel');
-      
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
-    }
+    } on PlatformException catch (e) {}
   }
 
   @override
@@ -30,6 +25,7 @@ class ActionButton extends HookConsumerWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return TextButton(
           onPressed: () {
+            _monitorBatteryLevel(ref);
             ref.read(isMonitoringProvider.notifier).state =
                 !ref.read(isMonitoringProvider.notifier).state;
           },
