@@ -25,8 +25,9 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
     if (isMonitoring) {
       streamSub = buildWithRealPercentage().listen((event) {
         if (event == null) {
-          ref.refresh(monitoringNotifierProvider);
-          ref.invalidateSelf();
+          print("YARAK YE : $event");
+          // ref.refresh(monitoringNotifierProvider);
+          // ref.invalidateSelf();
         }
         state = AsyncData(event);
       });
@@ -38,23 +39,21 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
   }
 
   Stream<int?> buildWithRealPercentage() async* {
-    while (true) {
-      final response = await ref
-          .read(monitoringNotifierProvider.notifier)
-          .monitorBatteryLevel();
-      yield response.when(monitoring: (batteryPercentage, msg) {
-        return batteryPercentage;
-      }, idle: (msg) {
-        return null;
-      });
-      await Future.delayed(const Duration(milliseconds: 5000));
-    }
+    final response = await ref
+        .read(monitoringNotifierProvider.notifier)
+        .monitorBatteryLevel();
+    yield response.when(monitoring: (batteryPercentage, msg) {
+      return batteryPercentage;
+    }, idle: (msg) {
+      return null;
+    });
   }
 
   Stream<int> buildWithRandomPercentage() async* {
-    while (true) {
-      yield Random.secure().nextInt(101);
-      await Future.delayed(const Duration(milliseconds: 5000));
-    }
+    Stream.periodic(Duration(milliseconds: 5000), (counter) {
+      return Random.secure().nextInt(101);
+    }).listen((event) {
+      state = AsyncData(event);
+    });
   }
 }
