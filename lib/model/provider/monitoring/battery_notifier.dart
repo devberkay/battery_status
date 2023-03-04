@@ -18,19 +18,15 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
       return false;
     });
 
-
     if (isMonitoring) {
-  await for (var element in buildWithRealPercentage()) {
-    yield element;
-  }
-}
-
-    else {
+      await for (var element in buildWithRealPercentage()) {
+        yield element;
+      }
+    } else {
       await for (var element in buildWithRandomPercentage()) {
-      yield element;
+        yield element;
+      }
     }
-    }
-    
   }
 
   Stream<int> buildWithRealPercentage() async* {
@@ -45,8 +41,9 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
         if (randomInt != null) {
           yield randomInt;
         } else {
-          ref.invalidate(monitoringNotifierProvider);
-          ref.invalidateSelf();
+          ref.refresh(monitoringNotifierProvider);
+          // ref.invalidate(monitoringNotifierProvider);
+          // ref.invalidateSelf();
         }
       }
     }
