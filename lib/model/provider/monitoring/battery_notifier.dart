@@ -9,51 +9,35 @@ final batteryNotifierProvider =
         BatteryNotifier.new);
 
 class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
-  late final StreamSubscription<int?> streamSub;
   @override
-  Stream<int?> build() async* {
-    ref.onDispose(() async {
-      await streamSub.cancel();
-    });
-    final isMonitoring = ref.watch(monitoringNotifierProvider).when(
-        monitoring: (batteryPercentage, msg) {
-      return true;
-    }, idle: (msg) {
-      return false;
+  Stream<int?> build() async* {}
+
+  Future<void> buildWithRealPercentage() async {
+    // final response = await ref
+    //     .read(monitoringNotifierProvider.notifier)
+    //     .monitorBatteryLevel();
+    final stream =
+        Stream.periodic(const Duration(milliseconds: 5000), (counter) async {
+      final res = await ref
+          .read(monitoringNotifierProvider.notifier)
+          .monitorBatteryLevel();
+      return res;
     });
 
-    if (isMonitoring) {
-      streamSub = buildWithRealPercentage().listen((event) {
-        if (event == null) {
-          print("YARAK YE : $event");
-          // ref.refresh(monitoringNotifierProvider);
-          // ref.invalidateSelf();
-        }
-        state = AsyncData(event);
-      });
-    } else {
-      streamSub = buildWithRandomPercentage().listen((event) {
-        state = AsyncData(event);
-      });
-    }
+    await for (var realNumber in stream) {}
   }
 
-  Stream<int?> buildWithRealPercentage() async* {
-    final response = await ref
-        .read(monitoringNotifierProvider.notifier)
-        .monitorBatteryLevel();
-    yield response.when(monitoring: (batteryPercentage, msg) {
-      return batteryPercentage;
-    }, idle: (msg) {
-      return null;
-    });
-  }
-
-  Stream<int> buildWithRandomPercentage() async* {
-    Stream.periodic(Duration(milliseconds: 5000), (counter) {
+  Future<void> buildWithRandomPercentage() async {
+    state = const AsyncLoading();
+    final stream =
+        Stream.periodic(const Duration(milliseconds: 5000), (counter) {
       return Random.secure().nextInt(101);
-    }).listen((event) {
-      state = AsyncData(event);
     });
+    await for (var randomNumber in stream) {
+      state = AsyncData(randomNumber);
+    }
+    // ref.onDispose(() async {
+    //   await sub.cancel();
+    // });
   }
 }
