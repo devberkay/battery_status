@@ -10,23 +10,7 @@ final isMonitoringProvider = StateProvider.autoDispose<bool>((ref) {
 
 class ActionButton extends HookConsumerWidget {
   const ActionButton({super.key});
-  static const platform = MethodChannel('berkaycan.dev/battery');
-  // Get battery level.
-
-  Future<MonitoringState> _monitorBatteryLevel(WidgetRef ref) async {
-    try {
-      final batteryPercentage = await platform.invokeMethod('getBatteryLevel');
-      ref.read(isMonitoringProvider.notifier).state =
-               true;
-      return MonitoringState.success(
-          batteryPercentage, "Current battery is $batteryPercentage");
-      
-    } on PlatformException catch (e) {
-      ref.read(isMonitoringProvider.notifier).state =
-                false;
-      return MonitoringState.fail(e.message ?? "Failed to check battery status");
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

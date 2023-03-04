@@ -19,39 +19,39 @@ mixin _$MonitoringState {
   String? get msg => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int battery, String? msg) success,
-    required TResult Function(String msg) fail,
+    required TResult Function(int battery, String? msg) monitoring,
+    required TResult Function(String? msg) idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int battery, String? msg)? success,
-    TResult? Function(String msg)? fail,
+    TResult? Function(int battery, String? msg)? monitoring,
+    TResult? Function(String? msg)? idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int battery, String? msg)? success,
-    TResult Function(String msg)? fail,
+    TResult Function(int battery, String? msg)? monitoring,
+    TResult Function(String? msg)? idle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Success value) success,
-    required TResult Function(Fail value) fail,
+    required TResult Function(Monitoring value) monitoring,
+    required TResult Function(Idle value) idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Success value)? success,
-    TResult? Function(Fail value)? fail,
+    TResult? Function(Monitoring value)? monitoring,
+    TResult? Function(Idle value)? idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Fail value)? fail,
+    TResult Function(Monitoring value)? monitoring,
+    TResult Function(Idle value)? idle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $MonitoringStateCopyWith<$Res> {
           MonitoringState value, $Res Function(MonitoringState) then) =
       _$MonitoringStateCopyWithImpl<$Res, MonitoringState>;
   @useResult
-  $Res call({String msg});
+  $Res call({String? msg});
 }
 
 /// @nodoc
@@ -83,32 +83,34 @@ class _$MonitoringStateCopyWithImpl<$Res, $Val extends MonitoringState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? msg = null,
+    Object? msg = freezed,
   }) {
     return _then(_value.copyWith(
-      msg: null == msg
-          ? _value.msg!
+      msg: freezed == msg
+          ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$SuccessCopyWith<$Res>
+abstract class _$$MonitoringCopyWith<$Res>
     implements $MonitoringStateCopyWith<$Res> {
-  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
-      __$$SuccessCopyWithImpl<$Res>;
+  factory _$$MonitoringCopyWith(
+          _$Monitoring value, $Res Function(_$Monitoring) then) =
+      __$$MonitoringCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int battery, String? msg});
 }
 
 /// @nodoc
-class __$$SuccessCopyWithImpl<$Res>
-    extends _$MonitoringStateCopyWithImpl<$Res, _$Success>
-    implements _$$SuccessCopyWith<$Res> {
-  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
+class __$$MonitoringCopyWithImpl<$Res>
+    extends _$MonitoringStateCopyWithImpl<$Res, _$Monitoring>
+    implements _$$MonitoringCopyWith<$Res> {
+  __$$MonitoringCopyWithImpl(
+      _$Monitoring _value, $Res Function(_$Monitoring) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +119,7 @@ class __$$SuccessCopyWithImpl<$Res>
     Object? battery = null,
     Object? msg = freezed,
   }) {
-    return _then(_$Success(
+    return _then(_$Monitoring(
       null == battery
           ? _value.battery
           : battery // ignore: cast_nullable_to_non_nullable
@@ -132,8 +134,8 @@ class __$$SuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Success implements Success {
-  const _$Success(this.battery, [this.msg]);
+class _$Monitoring implements Monitoring {
+  const _$Monitoring(this.battery, [this.msg]);
 
   @override
   final int battery;
@@ -142,14 +144,14 @@ class _$Success implements Success {
 
   @override
   String toString() {
-    return 'MonitoringState.success(battery: $battery, msg: $msg)';
+    return 'MonitoringState.monitoring(battery: $battery, msg: $msg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Success &&
+            other is _$Monitoring &&
             (identical(other.battery, battery) || other.battery == battery) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
@@ -160,36 +162,36 @@ class _$Success implements Success {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessCopyWith<_$Success> get copyWith =>
-      __$$SuccessCopyWithImpl<_$Success>(this, _$identity);
+  _$$MonitoringCopyWith<_$Monitoring> get copyWith =>
+      __$$MonitoringCopyWithImpl<_$Monitoring>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int battery, String? msg) success,
-    required TResult Function(String msg) fail,
+    required TResult Function(int battery, String? msg) monitoring,
+    required TResult Function(String? msg) idle,
   }) {
-    return success(battery, msg);
+    return monitoring(battery, msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int battery, String? msg)? success,
-    TResult? Function(String msg)? fail,
+    TResult? Function(int battery, String? msg)? monitoring,
+    TResult? Function(String? msg)? idle,
   }) {
-    return success?.call(battery, msg);
+    return monitoring?.call(battery, msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int battery, String? msg)? success,
-    TResult Function(String msg)? fail,
+    TResult Function(int battery, String? msg)? monitoring,
+    TResult Function(String? msg)? idle,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(battery, msg);
+    if (monitoring != null) {
+      return monitoring(battery, msg);
     }
     return orElse();
   }
@@ -197,95 +199,96 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Success value) success,
-    required TResult Function(Fail value) fail,
+    required TResult Function(Monitoring value) monitoring,
+    required TResult Function(Idle value) idle,
   }) {
-    return success(this);
+    return monitoring(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Success value)? success,
-    TResult? Function(Fail value)? fail,
+    TResult? Function(Monitoring value)? monitoring,
+    TResult? Function(Idle value)? idle,
   }) {
-    return success?.call(this);
+    return monitoring?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Fail value)? fail,
+    TResult Function(Monitoring value)? monitoring,
+    TResult Function(Idle value)? idle,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (monitoring != null) {
+      return monitoring(this);
     }
     return orElse();
   }
 }
 
-abstract class Success implements MonitoringState {
-  const factory Success(final int battery, [final String? msg]) = _$Success;
+abstract class Monitoring implements MonitoringState {
+  const factory Monitoring(final int battery, [final String? msg]) =
+      _$Monitoring;
 
   int get battery;
   @override
   String? get msg;
   @override
   @JsonKey(ignore: true)
-  _$$SuccessCopyWith<_$Success> get copyWith =>
+  _$$MonitoringCopyWith<_$Monitoring> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FailCopyWith<$Res> implements $MonitoringStateCopyWith<$Res> {
-  factory _$$FailCopyWith(_$Fail value, $Res Function(_$Fail) then) =
-      __$$FailCopyWithImpl<$Res>;
+abstract class _$$IdleCopyWith<$Res> implements $MonitoringStateCopyWith<$Res> {
+  factory _$$IdleCopyWith(_$Idle value, $Res Function(_$Idle) then) =
+      __$$IdleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String msg});
+  $Res call({String? msg});
 }
 
 /// @nodoc
-class __$$FailCopyWithImpl<$Res>
-    extends _$MonitoringStateCopyWithImpl<$Res, _$Fail>
-    implements _$$FailCopyWith<$Res> {
-  __$$FailCopyWithImpl(_$Fail _value, $Res Function(_$Fail) _then)
+class __$$IdleCopyWithImpl<$Res>
+    extends _$MonitoringStateCopyWithImpl<$Res, _$Idle>
+    implements _$$IdleCopyWith<$Res> {
+  __$$IdleCopyWithImpl(_$Idle _value, $Res Function(_$Idle) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? msg = null,
+    Object? msg = freezed,
   }) {
-    return _then(_$Fail(
-      null == msg
+    return _then(_$Idle(
+      freezed == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$Fail implements Fail {
-  const _$Fail(this.msg);
+class _$Idle implements Idle {
+  const _$Idle([this.msg]);
 
   @override
-  final String msg;
+  final String? msg;
 
   @override
   String toString() {
-    return 'MonitoringState.fail(msg: $msg)';
+    return 'MonitoringState.idle(msg: $msg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Fail &&
+            other is _$Idle &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
@@ -295,36 +298,36 @@ class _$Fail implements Fail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailCopyWith<_$Fail> get copyWith =>
-      __$$FailCopyWithImpl<_$Fail>(this, _$identity);
+  _$$IdleCopyWith<_$Idle> get copyWith =>
+      __$$IdleCopyWithImpl<_$Idle>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int battery, String? msg) success,
-    required TResult Function(String msg) fail,
+    required TResult Function(int battery, String? msg) monitoring,
+    required TResult Function(String? msg) idle,
   }) {
-    return fail(msg);
+    return idle(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int battery, String? msg)? success,
-    TResult? Function(String msg)? fail,
+    TResult? Function(int battery, String? msg)? monitoring,
+    TResult? Function(String? msg)? idle,
   }) {
-    return fail?.call(msg);
+    return idle?.call(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int battery, String? msg)? success,
-    TResult Function(String msg)? fail,
+    TResult Function(int battery, String? msg)? monitoring,
+    TResult Function(String? msg)? idle,
     required TResult orElse(),
   }) {
-    if (fail != null) {
-      return fail(msg);
+    if (idle != null) {
+      return idle(msg);
     }
     return orElse();
   }
@@ -332,41 +335,41 @@ class _$Fail implements Fail {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Success value) success,
-    required TResult Function(Fail value) fail,
+    required TResult Function(Monitoring value) monitoring,
+    required TResult Function(Idle value) idle,
   }) {
-    return fail(this);
+    return idle(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Success value)? success,
-    TResult? Function(Fail value)? fail,
+    TResult? Function(Monitoring value)? monitoring,
+    TResult? Function(Idle value)? idle,
   }) {
-    return fail?.call(this);
+    return idle?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Fail value)? fail,
+    TResult Function(Monitoring value)? monitoring,
+    TResult Function(Idle value)? idle,
     required TResult orElse(),
   }) {
-    if (fail != null) {
-      return fail(this);
+    if (idle != null) {
+      return idle(this);
     }
     return orElse();
   }
 }
 
-abstract class Fail implements MonitoringState {
-  const factory Fail(final String msg) = _$Fail;
+abstract class Idle implements MonitoringState {
+  const factory Idle([final String? msg]) = _$Idle;
 
   @override
-  String get msg;
+  String? get msg;
   @override
   @JsonKey(ignore: true)
-  _$$FailCopyWith<_$Fail> get copyWith => throw _privateConstructorUsedError;
+  _$$IdleCopyWith<_$Idle> get copyWith => throw _privateConstructorUsedError;
 }
