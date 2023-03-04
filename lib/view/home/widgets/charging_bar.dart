@@ -46,7 +46,7 @@ class ChargingBar extends HookConsumerWidget {
                   padding:
                       EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
                   child: Text(
-                    "%${(randomNo * 100).toStringAsFixed(2)}",
+                    "${(randomNo * 100).toStringAsFixed(2)}%",
                     style: TextStyle(
                         fontSize: constraints.maxWidth * 0.16,
                         fontWeight: FontWeight.bold),
