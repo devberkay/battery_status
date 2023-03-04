@@ -11,10 +11,8 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 final batteryPercentageProvider =
     StreamProvider.autoDispose<int?>((ref) async* {
-  final isMonitoring = ref.watch(isMonitoringProvider);
-  if (!isMonitoring) {
-      yield null;
-    }
+  
+  
   final periodicStream =
       Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
     
@@ -33,8 +31,7 @@ class ChargingBar extends HookConsumerWidget {
   const ChargingBar({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isMonitoring =
-        ref.watch(isMonitoringProvider); // true for expose , false for hide
+    final isMonitoring = ref.watch(monitoringNotifierProvider).when(monitoring: (batteryPercentage,msg)=>true, idle: (msg)=>false);
     final batteryPercentage =
         ref.watch(batteryPercentageProvider).asData?.value ??
             Random.secure().nextInt(101);

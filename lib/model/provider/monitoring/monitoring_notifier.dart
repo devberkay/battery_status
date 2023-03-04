@@ -18,12 +18,12 @@ class MonitoringNotifier extends Notifier<MonitoringState> {
     try {
       final batteryPercentage =
           await platform.invokeMethod('getBatteryLevel') as int;
-      ref.read(isMonitoringProvider.notifier).state = true;
+      // ref.read(isMonitoringProvider.notifier).state = true;
       state = MonitoringState.monitoring(
           batteryPercentage, "Current battery is $batteryPercentage%");
       return batteryPercentage;
     } on PlatformException catch (e) {
-      ref.read(isMonitoringProvider.notifier).state = false;
+      // ref.read(isMonitoringProvider.notifier).state = false;
       state = MonitoringState.idle(
           e.message ?? "Battery can't be monitored at the moment");
       
