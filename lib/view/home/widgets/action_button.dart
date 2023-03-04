@@ -15,16 +15,16 @@ class ActionButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isMonitoring = ref.watch(monitoringNotifierProvider).when(
-        monitoring: (batteryPercentage, msg) => true, idle: (msg) => false);
+    final isMonitoring = ref.watch(monitoringStateProvider).when(
+        monitoring: (_, __) => true, idle: (__) => false);
     return LayoutBuilder(builder: (context, constraints) {
       return TextButton(
           onPressed: () {
             if (isMonitoring) {
-              ref.read(monitoringNotifierProvider.notifier).deactivate();
+              ref.read(monitoringStateProvider.notifier).state= MonitoringState.idle();
             } else {
               ref
-                  .read(monitoringNotifierProvider.notifier)
+                  .read(monitoringStateProvider.notifier)
                   .monitorBatteryLevel();
             }
           },

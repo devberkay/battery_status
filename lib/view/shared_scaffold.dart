@@ -18,7 +18,7 @@ class SharedScaffold extends StatefulHookConsumerWidget {
 class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
   @override
   Widget build(BuildContext context) {
-    ref.listen<MonitoringState>(monitoringNotifierProvider, (previous, next) {
+    ref.listen<MonitoringState>(monitoringStateProvider, (previous, next) {
       if (next != previous) {
         next.when(monitoring: (percentage, msg) {
           FlashbarUtil.showUtilFlashbar(
