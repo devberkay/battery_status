@@ -32,7 +32,7 @@ class ChargingBar extends HookConsumerWidget {
   const ChargingBar({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isMonitoring = ref.watch(monitoringStateProvider).when(monitoring: (batteryPercentage,msg)=>true, idle: (msg)=>false);
+    final isMonitoring = ref.watch(monitoringStateProvider).when(monitoring: (__)=>true, idle: (__)=>false);
     final batteryPercentage =
         ref.watch(batteryNotifierProvider).asData?.value ??
             Random.secure().nextInt(101);

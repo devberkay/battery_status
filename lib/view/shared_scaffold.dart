@@ -20,7 +20,7 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
   Widget build(BuildContext context) {
     ref.listen<MonitoringState>(monitoringStateProvider, (previous, next) {
       if (next != previous) {
-        next.when(monitoring: (percentage, msg) {
+        next.when(monitoring: (msg) {
           FlashbarUtil.showUtilFlashbar(
               context: context,
               msg: next.msg ?? "Battery is being shown on the bar",

@@ -4,7 +4,7 @@ part 'monitoring_state.freezed.dart';
 
 @freezed
 class MonitoringState with _$MonitoringState {
-  const factory MonitoringState.monitoring(int battery, [String? msg]) =
+  const factory MonitoringState.monitoring([String? msg]) =
       Monitoring;
   const factory MonitoringState.idle([String? msg]) = Idle;
 }

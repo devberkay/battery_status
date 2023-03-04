@@ -12,24 +12,21 @@ final batteryNotifierProvider =
 class BatteryNotifier extends AutoDisposeStreamNotifier<int?> {
   @override
   Stream<int?> build() async* {
-    yield* ref.watch(monitoringNotifierProvider).when(
-        monitoring: (_, __) {
-          return buildWithRealPercentage();
-        },
-        idle: (__) {
-          return buildWithRandomPercentage();
-        });
+    yield* ref.watch(monitoringStateProvider).when(monitoring: (__) {
+      return buildWithRealPercentage();
+    }, idle: (__) {
+      return buildWithRandomPercentage();
+    });
   }
 
   Stream<int?> buildWithRealPercentage() async* {
     const platform = MethodChannel('berkaycan.dev/battery');
     try {
       yield* Stream.periodic(const Duration(milliseconds: 5000), (_) {
-
-      return platform.invokeMethod('getBatteryLevel');
-    }).asyncMap((event) async => await event);
+        return platform.invokeMethod('getBatteryLevel');
+      }).asyncMap((event) async => await event);
     } catch (e) {
-      ref.read(provider)
+      ref.refresh(monitoringStateProvider);
     }
   }
 

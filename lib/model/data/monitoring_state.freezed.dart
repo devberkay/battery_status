@@ -19,19 +19,19 @@ mixin _$MonitoringState {
   String? get msg => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int battery, String? msg) monitoring,
+    required TResult Function(String? msg) monitoring,
     required TResult Function(String? msg) idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int battery, String? msg)? monitoring,
+    TResult? Function(String? msg)? monitoring,
     TResult? Function(String? msg)? idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int battery, String? msg)? monitoring,
+    TResult Function(String? msg)? monitoring,
     TResult Function(String? msg)? idle,
     required TResult orElse(),
   }) =>
@@ -102,7 +102,7 @@ abstract class _$$MonitoringCopyWith<$Res>
       __$$MonitoringCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int battery, String? msg});
+  $Res call({String? msg});
 }
 
 /// @nodoc
@@ -116,14 +116,9 @@ class __$$MonitoringCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? battery = null,
     Object? msg = freezed,
   }) {
     return _then(_$Monitoring(
-      null == battery
-          ? _value.battery
-          : battery // ignore: cast_nullable_to_non_nullable
-              as int,
       freezed == msg
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -135,16 +130,14 @@ class __$$MonitoringCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Monitoring implements Monitoring {
-  const _$Monitoring(this.battery, [this.msg]);
+  const _$Monitoring([this.msg]);
 
-  @override
-  final int battery;
   @override
   final String? msg;
 
   @override
   String toString() {
-    return 'MonitoringState.monitoring(battery: $battery, msg: $msg)';
+    return 'MonitoringState.monitoring(msg: $msg)';
   }
 
   @override
@@ -152,12 +145,11 @@ class _$Monitoring implements Monitoring {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Monitoring &&
-            (identical(other.battery, battery) || other.battery == battery) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, battery, msg);
+  int get hashCode => Object.hash(runtimeType, msg);
 
   @JsonKey(ignore: true)
   @override
@@ -168,30 +160,30 @@ class _$Monitoring implements Monitoring {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int battery, String? msg) monitoring,
+    required TResult Function(String? msg) monitoring,
     required TResult Function(String? msg) idle,
   }) {
-    return monitoring(battery, msg);
+    return monitoring(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int battery, String? msg)? monitoring,
+    TResult? Function(String? msg)? monitoring,
     TResult? Function(String? msg)? idle,
   }) {
-    return monitoring?.call(battery, msg);
+    return monitoring?.call(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int battery, String? msg)? monitoring,
+    TResult Function(String? msg)? monitoring,
     TResult Function(String? msg)? idle,
     required TResult orElse(),
   }) {
     if (monitoring != null) {
-      return monitoring(battery, msg);
+      return monitoring(msg);
     }
     return orElse();
   }
@@ -229,10 +221,8 @@ class _$Monitoring implements Monitoring {
 }
 
 abstract class Monitoring implements MonitoringState {
-  const factory Monitoring(final int battery, [final String? msg]) =
-      _$Monitoring;
+  const factory Monitoring([final String? msg]) = _$Monitoring;
 
-  int get battery;
   @override
   String? get msg;
   @override
@@ -304,7 +294,7 @@ class _$Idle implements Idle {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int battery, String? msg) monitoring,
+    required TResult Function(String? msg) monitoring,
     required TResult Function(String? msg) idle,
   }) {
     return idle(msg);
@@ -313,7 +303,7 @@ class _$Idle implements Idle {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int battery, String? msg)? monitoring,
+    TResult? Function(String? msg)? monitoring,
     TResult? Function(String? msg)? idle,
   }) {
     return idle?.call(msg);
@@ -322,7 +312,7 @@ class _$Idle implements Idle {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int battery, String? msg)? monitoring,
+    TResult Function(String? msg)? monitoring,
     TResult Function(String? msg)? idle,
     required TResult orElse(),
   }) {
