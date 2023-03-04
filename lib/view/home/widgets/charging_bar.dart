@@ -9,7 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
-final batteryPercentageProvider = StreamProvider.autoDispose<int>((ref) async* {
+final batteryPercentageProvider =
+    StreamProvider.autoDispose<int?>((ref) async* {
   final isMonitoring = ref.watch(isMonitoringProvider);
   final periodicStream =
       Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
@@ -19,7 +20,7 @@ final batteryPercentageProvider = StreamProvider.autoDispose<int>((ref) async* {
   });
   await for (var streamController in periodicStream) {
     await for (var randomInt in streamController) {
-      yield randomInt ?? Random.secure().nextInt(101);
+      yield randomInt;
     }
   }
 });
