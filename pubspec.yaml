@@ -37,8 +37,8 @@ dev_dependencies:
   build_runner: any
   freezed: any
   json_serializable: any
-  custom_lint:
-  riverpod_lint:
+  custom_lint: any 
+  riverpod_lint: any
 
 
 flutter_native_splash:
