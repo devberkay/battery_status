@@ -9,8 +9,12 @@ final batteryNotifierProvider =
         BatteryNotifier.new);
 
 class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
+  late final StreamSubscription streamSub;
   @override
   Stream<int> build() async* {
+    ref.onDispose(() async {
+      await streamSub.cancel();
+    });
     final isMonitoring = ref.watch(monitoringNotifierProvider).when(
         monitoring: (batteryPercentage, msg) {
       return true;
@@ -30,31 +34,23 @@ class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
   }
 
   Stream<int> buildWithRealPercentage() async* {
-    final periodicStream =
-        Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
-      yield await ref
+    while (true) {
+      final response = await ref
           .read(monitoringNotifierProvider.notifier)
           .monitorBatteryLevel();
-    });
-    await for (var streamController in periodicStream) {
-      await for (var randomInt in streamController) {
-        if (randomInt != null) {
-          yield randomInt;
-        } else {
-          ref.refresh(monitoringNotifierProvider);
-          // ref.invalidate(monitoringNotifierProvider);
-          // ref.invalidateSelf();
-        }
+      if (response != null) {
+        yield response;
+      } else {
+        
       }
+      await Future.delayed(const Duration(milliseconds: 5000));
     }
   }
 
   Stream<int> buildWithRandomPercentage() async* {
-    final streamSub =
-        Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
+    while (true) {
       yield Random.secure().nextInt(101);
-    }).listen((event) {
-      
-    });
+      await Future.delayed(const Duration(milliseconds: 5000));
+    }
   }
 }
