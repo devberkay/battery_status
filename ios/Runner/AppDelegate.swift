@@ -6,7 +6,7 @@ import Flutter
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+    
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
     let batteryChannel = FlutterMethodChannel(name: "berkaycan.dev/battery",
                                               binaryMessenger: controller.binaryMessenger)
