@@ -16,8 +16,8 @@ class ActionButton extends HookConsumerWidget {
   Future<void> _getBatteryLevel() async {
     
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      return await platform.invokeMethod('getBatteryLevel');
+      
     } on PlatformException catch (e) {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
     }
