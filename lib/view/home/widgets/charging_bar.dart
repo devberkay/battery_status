@@ -11,9 +11,13 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 final batteryPercentageProvider =
     StreamProvider.autoDispose<int?>((ref) async* {
-  
+  final isMonitoring = ref.watch(isMonitoringProvider);
+  if (!isMonitoring) {
+      yield null;
+    }
   final periodicStream =
       Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
+    
     yield await ref
         .read(monitoringNotifierProvider.notifier)
         .monitorBatteryLevel(ref);
@@ -31,8 +35,9 @@ class ChargingBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMonitoring =
         ref.watch(isMonitoringProvider); // true for expose , false for hide
-    final batteryPercentage = ref.watch(batteryPercentageProvider).asData?.value ??
-        Random.secure().nextInt(101);
+    final batteryPercentage =
+        ref.watch(batteryPercentageProvider).asData?.value ??
+            Random.secure().nextInt(101);
     final percentageController = useAnimationController(
         upperBound: 100,
         lowerBound: 0,

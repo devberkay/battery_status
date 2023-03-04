@@ -19,7 +19,8 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
   @override
   Widget build(BuildContext context) {
     ref.listen<MonitoringState>(monitoringNotifierProvider, (previous, next) {
-      next.when(
+      if (next != previous) {
+        next.when(
             monitoring: FlashbarUtil.showUtilFlashbar(
                 context: context,
                 msg: next.msg ?? "Battery is being shown on the bar",
@@ -30,6 +31,7 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
                 leftBarIndicatorColor: Colors.redAccent,
                 msg: next.msg ?? "Battery can't be monitored at the moment",
                 actionMsg: "Dismiss"));
+      }
     });
     return SafeArea(
       child: ScrollConfiguration(
