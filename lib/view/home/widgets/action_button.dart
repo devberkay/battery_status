@@ -1,4 +1,5 @@
 import 'package:BatteryStatus/model/data/monitoring_state.dart';
+import 'package:BatteryStatus/model/provider/monitoring/battery_notifier.dart';
 import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,14 +15,18 @@ class ActionButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final isMonitoring = ref.watch(monitoringNotifierProvider).when(
         monitoring: (batteryPercentage, msg) => true, idle: (msg) => false);
     return LayoutBuilder(builder: (context, constraints) {
       return TextButton(
           onPressed: () {
-            ref.read(isButtonActivatedProvider.notifier).state =
-                !ref.read(isButtonActivatedProvider.notifier).state;
+            if (isMonitoring) {
+              
+            } else {
+              ref
+                  .read(batteryNotifierProvider.notifier)
+                  .buildWithRealPercentage();
+            }
           },
           style: ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.zero),

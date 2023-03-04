@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:BatteryStatus/model/provider/monitoring/battery_notifier.dart';
 import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart';
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
 import 'package:flutter/material.dart';
@@ -9,23 +10,23 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
-final batteryPercentageProvider =
-    StreamProvider.autoDispose<int?>((ref) async* {
+// final batteryPercentageProvider =
+//     StreamProvider.autoDispose<int?>((ref) async* {
   
   
-  final periodicStream =
-      Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
+//   final periodicStream =
+//       Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
     
-    yield await ref
-        .read(monitoringNotifierProvider.notifier)
-        .monitorBatteryLevel(ref);
-  });
-  await for (var streamController in periodicStream) {
-    await for (var randomInt in streamController) {
-      yield randomInt;
-    }
-  }
-});
+//     yield await ref
+//         .read(monitoringNotifierProvider.notifier)
+//         .monitorBatteryLevel(ref);
+//   });
+//   await for (var streamController in periodicStream) {
+//     await for (var randomInt in streamController) {
+//       yield randomInt;
+//     }
+//   }
+// });
 
 class ChargingBar extends HookConsumerWidget {
   const ChargingBar({super.key});
@@ -33,7 +34,7 @@ class ChargingBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMonitoring = ref.watch(monitoringNotifierProvider).when(monitoring: (batteryPercentage,msg)=>true, idle: (msg)=>false);
     final batteryPercentage =
-        ref.watch(batteryPercentageProvider).asData?.value ??
+        ref.watch(batteryNotifierProvider).asData?.value ??
             Random.secure().nextInt(101);
     final percentageController = useAnimationController(
         upperBound: 100,

@@ -10,7 +10,6 @@ final monitoringNotifierProvider =
 class MonitoringNotifier extends AutoDisposeNotifier<MonitoringState> {
   @override
   build() {
-    
     return const MonitoringState.idle();
   }
 
@@ -27,6 +26,7 @@ class MonitoringNotifier extends AutoDisposeNotifier<MonitoringState> {
       // ref.read(isMonitoringProvider.notifier).state = false;
       state = MonitoringState.idle(
           e.message ?? "Battery can't be monitored at the moment");
+      return null;
     }
   }
 }

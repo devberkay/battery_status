@@ -5,20 +5,18 @@ import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final batteryNotifierProvider =
-    StreamNotifierProvider<BatteryNotifier, int>(BatteryNotifier.new);
+    StreamNotifierProvider.autoDispose<BatteryNotifier, int>(
+        BatteryNotifier.new);
 
-class BatteryNotifier extends StreamNotifier<int> {
+class BatteryNotifier extends AutoDisposeStreamNotifier<int> {
   @override
   Stream<int> build() async* {
-    final periodicStream =
-        Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
-      yield Random.secure().nextInt(101);
+    ref.watch(monitoringNotifierProvider).when(
+        monitoring: (batteryPercentage, msg) async* {
+      yield buildWithRealPercentage();
+    }, idle: (msg) async*{
+      yield buildWithRandomPercentage();
     });
-    await for (var streamController in periodicStream) {
-      await for (var randomInt in streamController) {
-        yield randomInt;
-      }
-    }
   }
 
   Stream<int> buildWithRealPercentage() async* {
@@ -36,6 +34,18 @@ class BatteryNotifier extends StreamNotifier<int> {
           ref.invalidate(monitoringNotifierProvider);
           ref.invalidateSelf();
         }
+      }
+    }
+  }
+
+  Stream<int> buildWithRandomPercentage() async* {
+    final periodicStream =
+        Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
+      yield Random.secure().nextInt(101);
+    });
+    await for (var streamController in periodicStream) {
+      await for (var randomInt in streamController) {
+        yield randomInt;
       }
     }
   }
