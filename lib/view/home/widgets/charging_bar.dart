@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart';
 import 'package:BatteryStatus/view/home/widgets/action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -8,15 +9,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
-final batteryPercentageProvider =
-    StreamProvider.autoDispose<double>((ref) async* {
+final batteryPercentageProvider = StreamProvider.autoDispose<int>((ref) async* {
   final isMonitoring = ref.watch(isMonitoringProvider);
   final periodicStream = isMonitoring
       ? Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
-          yield Random.secure().nextDouble();
+          yield Random.secure().nextInt(101);
         })
       : Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
-          yield Random.secure().nextDouble();
+          await ref
+              .read(monitoringNotifierProvider.notifier)
+              .monitorBatteryLevel(ref);
         });
   await for (var streamController in periodicStream) {
     await for (var randomDouble in streamController) {

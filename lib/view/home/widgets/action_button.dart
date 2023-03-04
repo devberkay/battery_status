@@ -19,7 +19,7 @@ class ActionButton extends HookConsumerWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return TextButton(
           onPressed: () {
-            _monitorBatteryLevel(ref);
+            
             
           },
           style: ButtonStyle(
