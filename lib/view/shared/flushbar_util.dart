@@ -7,10 +7,12 @@ class FlashbarUtil {
       {required BuildContext context,
       required String msg,
       required String actionMsg,
-      Color? leftBarIndicatorColor}) {
+      Color? leftBarIndicatorColor,
+      FlushbarPosition? flushbarPosition}) {
     final usableHeight = MediaQuery.of(context).size.height;
     final usableWidth = MediaQuery.of(context).size.width;
     Flushbar(
+      flushbarPosition: flushbarPosition ?? FlushbarPosition.BOTTOM,
       leftBarIndicatorColor: leftBarIndicatorColor,
       duration: const Duration(milliseconds: 3000),
       message: msg,

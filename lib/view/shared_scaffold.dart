@@ -1,6 +1,8 @@
 import 'package:BatteryStatus/model/data/monitoring_state.dart';
+import 'package:BatteryStatus/model/provider/monitoring/battery_notifier.dart';
 import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart';
 import 'package:BatteryStatus/view/shared/flushbar_util.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,24 +23,31 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
     ref.listen<MonitoringState>(monitoringStateProvider, (previous, next) {
       if (next != previous) {
         next.when(monitoring: (msg) {
-        
-            FlashbarUtil.showUtilFlashbar(
-                context: context,
-                msg: next.msg!,
-                leftBarIndicatorColor: Colors.lightGreenAccent,
-                actionMsg: "Dismiss");
-      
+          FlashbarUtil.showUtilFlashbar(
+              context: context,
+              msg: next.msg!,
+              leftBarIndicatorColor: Colors.lightGreenAccent,
+              actionMsg: "Dismiss");
         }, idle: (msg) {
-        
-            FlashbarUtil.showUtilFlashbar(
-                context: context,
-                leftBarIndicatorColor: Colors.redAccent,
-                msg: next.msg!,
-                actionMsg: "Dismiss");
-     
-          
+          FlashbarUtil.showUtilFlashbar(
+              context: context,
+              leftBarIndicatorColor: Colors.redAccent,
+              msg: next.msg!,
+              actionMsg: "Dismiss");
         });
       }
+    });
+    ref.listen(batteryNotifierProvider, (previous, next) {
+      next.whenData((value) {
+        if (value!=null && value < 20) {
+          FlashbarUtil.showUtilFlashbar(
+              context: context,
+              flushbarPosition: FlushbarPosition.TOP,
+              msg: "Battery has dropped to $value%",
+              leftBarIndicatorColor: Colors.redAccent,
+              actionMsg: "Dismiss");
+        } 
+      });
     });
     return SafeArea(
       child: ScrollConfiguration(
