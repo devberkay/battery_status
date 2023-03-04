@@ -11,18 +11,15 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 final batteryPercentageProvider = StreamProvider.autoDispose<int>((ref) async* {
   final isMonitoring = ref.watch(isMonitoringProvider);
-  final periodicStream = isMonitoring
-      ? Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
-          yield Random.secure().nextInt(101);
-        })
-      : Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
-          await ref
-              .read(monitoringNotifierProvider.notifier)
-              .monitorBatteryLevel(ref);
-        });
+  final periodicStream =
+      Stream.periodic(const Duration(milliseconds: 5000), (counter) async* {
+    yield await ref
+        .read(monitoringNotifierProvider.notifier)
+        .monitorBatteryLevel(ref);
+  });
   await for (var streamController in periodicStream) {
-    await for (var randomDouble in streamController) {
-      yield randomDouble;
+    await for (var randomInt in streamController) {
+      yield randomInt ?? Random.secure().nextInt(101);
     }
   }
 });
@@ -33,11 +30,15 @@ class ChargingBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMonitoring =
         ref.watch(isMonitoringProvider); // true for expose , false for hide
-    final randomNo = ref.watch(batteryPercentageProvider).asData?.value ?? 0.5;
+    final randomNo = ref.watch(batteryPercentageProvider).asData?.value ??
+        Random.secure().nextInt(101);
     final percentageController = useAnimationController(
-        duration: const Duration(milliseconds: 1000), initialValue: randomNo);
+        upperBound: 100,
+        lowerBound: 0,
+        duration: const Duration(milliseconds: 1000),
+        initialValue: randomNo.toDouble());
     useEffect(() {
-      percentageController.animateTo(randomNo);
+      percentageController.animateTo(randomNo.toDouble());
     });
     return LayoutBuilder(builder: (context, constraints) {
       return SizedBox(
@@ -52,7 +53,7 @@ class ChargingBar extends HookConsumerWidget {
                   padding:
                       EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
                   child: Text(
-                    "${(randomNo * 100).toStringAsFixed(2)}%",
+                    "${randomNo.toStringAsFixed(0)}%",
                     style: TextStyle(
                         fontSize: constraints.maxWidth * 0.16,
                         fontWeight: FontWeight.bold),
