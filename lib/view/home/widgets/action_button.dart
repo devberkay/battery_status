@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,8 +9,10 @@ final isMonitoringProvider = StateProvider.autoDispose<bool>((ref) {
 
 class ActionButton extends HookConsumerWidget {
   const ActionButton({super.key});
+  static const platform = MethodChannel('berkaycan.dev/battery');
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     final isMonitoring =
         ref.watch(isMonitoringProvider); // true for expose , false for hide
     return LayoutBuilder(builder: (context, constraints) {
