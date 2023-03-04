@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final isMonitoringProvider = StateProvider.autoDispose<bool>((ref) {
+final isButtonActivatedProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
 });
 
@@ -20,8 +20,8 @@ class ActionButton extends HookConsumerWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return TextButton(
           onPressed: () {
-            ref.read(isMonitoringProvider.notifier).state =
-                !ref.read(isMonitoringProvider.notifier).state;
+            ref.read(isButtonActivatedProvider.notifier).state =
+                !ref.read(isButtonActivatedProvider.notifier).state;
           },
           style: ButtonStyle(
               padding: MaterialStatePropertyAll(EdgeInsets.zero),

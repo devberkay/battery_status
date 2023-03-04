@@ -4,12 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final monitoringNotifierProvider =
-    NotifierProvider<MonitoringNotifier, MonitoringState>(
+    NotifierProvider.autoDispose<MonitoringNotifier, MonitoringState>(
         MonitoringNotifier.new);
 
-class MonitoringNotifier extends Notifier<MonitoringState> {
+class MonitoringNotifier extends AutoDisposeNotifier<MonitoringState> {
   @override
   build() {
+    
     return const MonitoringState.idle();
   }
 
@@ -26,7 +27,6 @@ class MonitoringNotifier extends Notifier<MonitoringState> {
       // ref.read(isMonitoringProvider.notifier).state = false;
       state = MonitoringState.idle(
           e.message ?? "Battery can't be monitored at the moment");
-      
     }
   }
 }
