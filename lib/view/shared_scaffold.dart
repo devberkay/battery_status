@@ -1,6 +1,7 @@
 import 'package:BatteryStatus/model/data/monitoring_state.dart';
 import 'package:BatteryStatus/model/provider/monitoring/battery_notifier.dart';
 import 'package:BatteryStatus/model/provider/monitoring/monitoring_notifier.dart';
+import 'package:BatteryStatus/model/provider/notification/notification_notifier.dart';
 import 'package:BatteryStatus/view/shared/flushbar_util.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -38,15 +39,17 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
       }
     });
     ref.listen(batteryNotifierProvider, (previous, next) {
+      final isNotificationsActive = ref.watch(notificationProvider);
       next.whenData((value) {
-        if (value!=null && value < 20) {
+        if (value != null && isNotificationsActive  && value < 20) {
+          
           FlashbarUtil.showUtilFlashbar(
               context: context,
               flushbarPosition: FlushbarPosition.TOP,
               msg: "Battery has dropped to $value%",
               leftBarIndicatorColor: Colors.redAccent,
               actionMsg: "Dismiss");
-        } 
+        }
       });
     });
     return SafeArea(
