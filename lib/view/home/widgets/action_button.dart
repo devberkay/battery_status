@@ -21,13 +21,13 @@ class ActionButton extends HookConsumerWidget {
       return TextButton(
           onPressed: () {
             if (isMonitoring) {
-              ref.read(monitoringStateProvider.notifier).state= MonitoringState.idle();
+              ref.read(monitoringStateProvider.notifier).state= const MonitoringState.idle("Mock battery percentage is being shown.");
             } else {
-              ref.read(monitoringStateProvider.notifier).state= MonitoringState.monitoring();
+              ref.read(monitoringStateProvider.notifier).state= const MonitoringState.monitoring("Device battery percentage is being shown.");
             }
           },
           style: ButtonStyle(
-              padding: MaterialStatePropertyAll(EdgeInsets.zero),
+              padding: const MaterialStatePropertyAll(EdgeInsets.zero),
               alignment: Alignment.center,
               splashFactory: InkSparkle.splashFactory,
               overlayColor: MaterialStatePropertyAll(Colors.grey.shade400),

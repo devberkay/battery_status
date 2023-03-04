@@ -21,21 +21,21 @@ class _SharedScaffoldState extends ConsumerState<SharedScaffold> {
     ref.listen<MonitoringState>(monitoringStateProvider, (previous, next) {
       if (next != previous) {
         next.when(monitoring: (msg) {
-          if (next.msg != null) {
+        
             FlashbarUtil.showUtilFlashbar(
                 context: context,
                 msg: next.msg!,
                 leftBarIndicatorColor: Colors.lightGreenAccent,
                 actionMsg: "Dismiss");
-          }
+      
         }, idle: (msg) {
-          if (next.msg != null) {
+        
             FlashbarUtil.showUtilFlashbar(
                 context: context,
                 leftBarIndicatorColor: Colors.redAccent,
                 msg: next.msg!,
                 actionMsg: "Dismiss");
-          }
+     
           
         });
       }
