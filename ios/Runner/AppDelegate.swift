@@ -11,10 +11,15 @@ import Flutter
     let batteryChannel = FlutterMethodChannel(name: "berkaycan.dev/battery",
                                               binaryMessenger: controller.binaryMessenger)
     batteryChannel.setMethodCallHandler({
-      (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-      // This method is invoked on the UI thread.
-      // Handle battery messages.
-    })
+  [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
+  // This method is invoked on the UI thread.
+  guard call.method == "getBatteryLevel" else {
+    result(FlutterMethodNotImplemented)
+    return
+  }
+  self?.receiveBatteryLevel(result: result)
+})
+
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
